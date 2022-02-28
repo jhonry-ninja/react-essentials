@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 
 function Header(props) {
-  console.log(props);
   return (
     <header>
       <h1>{props.name}'s Kitchen</h1>
@@ -16,7 +15,7 @@ function Main(props) {
       <p>We cook the most {props.adjective} food ever.</p>
       <ul style={{textAlign: "left"}}>
         {props.dishes.map((dish) => (
-        <li>{dish}</li>
+        <li key={dish.id}>{dish.title}</li>
         ))}
       </ul>
     </section>
@@ -38,11 +37,13 @@ const dishes = [
   "Lumpia"
 ];
 
+const dishObjects = dishes.map((dish, i) => ({id: i, title: dish}));
+
 function App() {
   return (
     <div className="App">
       <Header name="Jammo" />
-      <Main adjective="tremendous" dishes={dishes}/>
+      <Main adjective="tremendous" dishes={dishObjects}/>
       <Footer year={new Date().getFullYear()}/>
     </div>
   );
